@@ -47,7 +47,7 @@ wwwroot/scss/
 wwwroot/lib/
 wwwroot/temp/
 wwwroot/logs/
-wwwroot/images/
+wwwroot/assets/
 
 # =========================
 # NuGet Packages
