@@ -1,7 +1,7 @@
-﻿@page "/product"
+﻿@page "/Components/product"
 <div style="text-align:center">
     <h1>
-        This is product page.
+        @Title
     </h1>
     <p>
         Feel free to
@@ -14,5 +14,6 @@
 </div>
 
 @code {
-
+    [Parameter]
+    public string Title { get; set; } = "This is product page.";
 }

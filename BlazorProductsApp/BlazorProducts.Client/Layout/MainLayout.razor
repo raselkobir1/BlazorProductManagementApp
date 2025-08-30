@@ -1,16 +1,35 @@
-﻿@inherits LayoutComponentBase
+﻿@inject NavigationManager Navigation
+@inherits LayoutComponentBase
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+    @if (IsLoggedIn)
+    {
+        <div class="sidebar">
+            <NavMenu />
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        <main>
+            <div class="top-row px-4">
+                <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            </div>
+
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
+    }
 </div>
+
+
+@code {
+    private bool IsLoggedIn = true;
+    protected override void OnInitialized()
+    {
+        // Simulate authentication check
+        // In a real app, check authentication state here
+        if (!IsLoggedIn)
+        {
+            Navigation.NavigateTo("/unauthorized");
+
+        }
+    }
+}

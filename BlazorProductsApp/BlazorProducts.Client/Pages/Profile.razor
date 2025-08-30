@@ -1,0 +1,71 @@
+﻿@page "/profile"
+@layout Layout.MainLayout
+@inject NavigationManager Navigation
+@* @inject AuthService AuthService *@
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4" style="max-width: 600px; margin: auto;">
+        <div class="d-flex align-items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                 class="rounded-circle me-4"
+                 style="width: 100px; height: 100px; border: 3px solid #007bff;" />
+            <div>
+                <h3>@UserName</h3>
+                <p class="text-muted mb-1">@Email</p>
+                <span class="badge bg-success">Active</span>
+            </div>
+        </div>
+
+        <hr />
+
+        <h5 class="mt-3">Profile Information</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Full Name:</strong> @UserName
+            </li>
+            <li class="list-group-item">
+                <strong>Email:</strong> @Email
+            </li>
+            <li class="list-group-item">
+                <strong>Role:</strong> @Role
+            </li>
+            <li class="list-group-item">
+                <strong>Joined:</strong> @JoinDate
+            </li>
+        </ul>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-primary me-2" @onclick="EditProfile">Edit Profile</button>
+            <button class="btn btn-danger" @onclick="Logout">Logout</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    // Static demo data (Later, can be dynamic from API)
+    private string UserName = "John Doe";
+    private string Email = "john.doe@example.com";
+    private string Role = "Administrator";
+    private string JoinDate = "January 15, 2023";
+
+    // protected override void OnInitialized()
+    // {
+    //     // Check if user is logged in; if not → redirect to Unauthorized page
+    //     if (!AuthService.IsLoggedIn)
+    //     {
+    //         Navigation.NavigateTo("/unauthorized");
+    //     }
+    // }
+
+    private void EditProfile()
+    {
+        // For now, just show alert or navigate to edit profile page later
+        Console.WriteLine("Edit profile clicked!");
+    }
+
+    private void Logout()
+    {
+        //AuthService.Logout();
+        Navigation.NavigateTo("/");
+    }
+}
