@@ -15,7 +15,7 @@ namespace BlazorProducts.Server.Controllers
             _repo = repo;
         }
 
-        [HttpGet]
+        [HttpGet("get-products")]
         public async Task<IActionResult> Get()
         {
             var products = await _repo.GetProducts();

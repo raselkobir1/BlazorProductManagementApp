@@ -1,5 +1,5 @@
 ﻿using BlazorProducts.Server.Context;
-using BlazorProducts.Server.Entities;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorProducts.Server.Repository

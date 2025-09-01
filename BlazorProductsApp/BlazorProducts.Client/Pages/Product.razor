@@ -1,19 +1,20 @@
 ﻿@page "/product"
-<div style="text-align:center">
-    <h1>
-        @Title
-    </h1>
-    <p>
-        Feel free to
-        <a href="https://www.redbubble.com/people/vpecanac/works/44764889-code-maze-merch?asc=u" target="_blank">visit our shop</a>
-        any time you want.
-    </p>
-    <p>
-        <img src="/assets/products/mac.png" alt="products image for the Home component" class="img-fluid" />
-    </p>
-</div>
 
-@code {
-    [Parameter]
-    public string Title { get; set; } = "This is product page.";
-}
+<div class="row">
+    <div class="col-md-10">
+        @*Place for search and sort*@
+    </div>
+    <div class="col-md-2">
+        <a href="/createProduct">Create Product</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <ProductTable Products="ProductList" />
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        @*Place for pagination*@
+    </div>
+</div>

@@ -1,9 +1,9 @@
-﻿//using BlazorProducts.Client.Pages;
+﻿using Entities.Models;
 
 namespace BlazorProducts.Client.Repository
 {
     public interface IProductHttpRepository
     {
-        //Task<List<Product>> GetProducts();
+        Task<List<Product>> GetProducts();
     }
 }

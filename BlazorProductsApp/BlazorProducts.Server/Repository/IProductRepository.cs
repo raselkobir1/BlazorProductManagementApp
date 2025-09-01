@@ -1,4 +1,4 @@
-﻿using BlazorProducts.Server.Entities;
+﻿using Entities.Models;
 
 namespace BlazorProducts.Server.Repository
 {
