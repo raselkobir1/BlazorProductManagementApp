@@ -34,7 +34,8 @@ namespace BlazorProducts.Client.Repository
         {
             var queryStringParam = new Dictionary<string, string>
             {
-                ["pageNumber"] = productParameters.PageNumber.ToString()
+                ["pageNumber"] = productParameters.PageNumber.ToString(),
+                ["searchTerm"] = productParameters.SearchTerm == null ? "" : productParameters.SearchTerm
             };
             var response = await _client.GetAsync(QueryHelpers.AddQueryString("products/get-paginated-products", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();

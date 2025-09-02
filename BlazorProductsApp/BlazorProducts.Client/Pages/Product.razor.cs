@@ -21,6 +21,13 @@ namespace BlazorProducts.Client.Pages
             _productParameters.PageNumber = page;
             await GetProducts();
         }
+        private async Task SearchChanged(string searchTerm)
+        {
+            Console.WriteLine(searchTerm);
+            _productParameters.PageNumber = 1;
+            _productParameters.SearchTerm = searchTerm;
+            await GetProducts();
+        }
         private async Task GetProducts()
         {
             //ProductList = await ProductRepo.GetProducts(); // without paging
