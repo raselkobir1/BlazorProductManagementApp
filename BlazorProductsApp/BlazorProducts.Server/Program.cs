@@ -13,7 +13,8 @@ builder.Services.AddCors(policy =>
                 policy.AddPolicy("CorsPolicy", opt => opt
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod());
+                .AllowAnyMethod()
+                .WithExposedHeaders("X-Pagination"));
                 });
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
