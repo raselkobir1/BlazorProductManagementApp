@@ -3,7 +3,7 @@ using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Components;
 namespace BlazorProducts.Client.Pages
 {
-    public partial class Product
+    public partial class Products
     {
         public List<Entities.Models.Product> ProductList { get; set; } = new List<Entities.Models.Product>();
         public MetaData MetaData { get; set; } = new MetaData();

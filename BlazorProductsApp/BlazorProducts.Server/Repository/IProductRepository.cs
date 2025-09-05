@@ -8,5 +8,6 @@ namespace BlazorProducts.Server.Repository
     {
         Task<IEnumerable<Product>> GetProducts();
         Task<PagedList<Product>> GetProducts(ProductParameters productParameters);
+        Task CreateProduct(Product product);
     }
 }
