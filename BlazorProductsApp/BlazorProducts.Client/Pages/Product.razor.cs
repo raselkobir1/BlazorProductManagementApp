@@ -36,5 +36,12 @@ namespace BlazorProducts.Client.Pages
             ProductList = pagingResponse.Items;
             MetaData = pagingResponse.MetaData;
         }
+
+        private async Task SortChanged(string orderBy)
+        {
+            Console.WriteLine(orderBy);
+            _productParameters.OrderBy = orderBy;
+            await GetProducts();
+        }
     }
 }
