@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlazorProducts.Server.Controllers
 {
     [Route("api/products")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _repo;
