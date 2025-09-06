@@ -1,6 +1,8 @@
 using BlazorProducts.Client;
+using BlazorProducts.Client.AuthProviders;
 using BlazorProducts.Client.Repository;
 using BlazorProducts.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -17,4 +19,6 @@ builder.Services.AddScoped(sp => new HttpClient
 });
 builder.Services.AddScoped<IProductHttpRepository, ProductHttpRepository>();
 
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, TestAuthStateProvider>();
 await builder.Build().RunAsync();

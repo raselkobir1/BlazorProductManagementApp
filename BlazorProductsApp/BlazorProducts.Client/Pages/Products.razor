@@ -1,5 +1,8 @@
 ﻿@page "/products"
 
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
 <div class="row">
     <div class="col-md-5">
         <Search OnSearchChanged="SearchChanged" />

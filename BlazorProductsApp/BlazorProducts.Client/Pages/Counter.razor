@@ -1,8 +1,19 @@
 ﻿@page "/counter"
+@using System.Security.Claims
+@* @inject AuthenticationStateProvider AuthStateProvider *@
 
 <PageTitle>Counter</PageTitle>
-
-<h1>Counter</h1>
+<AuthorizeView>
+    <Authorized>
+        <h3 class="alert-primary"> The user is authorized</h3>
+        <h4>Welcome,  @context?.User?.Identity?.Name</h4>
+        <h4>The Role: @context?.User?.FindFirst(ClaimTypes.Role)?.Value</h4>
+    </Authorized>
+    <NotAuthorized>
+        The User is not authorized
+    </NotAuthorized>
+</AuthorizeView>
+<h3>Counter</h3>
 
 <p role="status">Current count: @currentCount</p>
 
@@ -10,9 +21,15 @@
 
 @code {
     private int currentCount = 0;
-
-    private void IncrementCount()
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+    private async Task IncrementCount()
     {
-        currentCount++;
+        var authState = await AuthState;
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+            currentCount++;
+        else
+            currentCount--;
     }
 }
