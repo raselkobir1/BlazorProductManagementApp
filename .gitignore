@@ -47,7 +47,8 @@ wwwroot/scss/
 wwwroot/lib/
 wwwroot/temp/
 wwwroot/logs/
-BlazorProductsApp/BlazorProducts.Client/wwwroot/assets/products/*.{png,jpg,jpeg,gif,svg}
+BlazorProductsApp/BlazorProducts.Client/wwwroot/assets/products/*
+BlazorProductsApp/BlazorProducts.Server/StaticFiles/Images/*
 
 
 # =========================
