@@ -1,10 +1,12 @@
 ﻿using BlazorProducts.Server.Context.Configuration;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorProducts.Server.Context
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions options)
             : base(options)
@@ -13,6 +15,7 @@ namespace BlazorProducts.Server.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
 

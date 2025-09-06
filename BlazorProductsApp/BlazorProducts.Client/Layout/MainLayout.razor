@@ -1,7 +1,7 @@
-﻿@using BlazorProducts.Client.Services
+﻿@using BlazorProducts.Client.Components
+@using BlazorProducts.Client.Services
 
 @inject NavigationManager Navigation
-@inject AuthService AuthService
 @inherits LayoutComponentBase
 
 <div class="page">
@@ -10,15 +10,9 @@
     </div>
 
     <main>
-        @*  <div class="top-row px-4">
-        <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div> *@
-        @if (AuthService.IsLoggedIn)
-        {
-            <div class="top-row px-4">
-                <button class="btn btn-danger mt-2 mb-2" @onclick="Logout">Logout</button>
-            </div>
-        }
+        <div class="top-row px-4">
+            <AuthLinks />
+        </div>
 
         <article class="content px-4">
             @Body
@@ -28,12 +22,4 @@
 
 
 @code {
-    protected override void OnInitialized()
-    {
-    }
-    void Logout()
-    {
-        AuthService.Logout();
-        Navigation.NavigateTo("/");
-    }
 }

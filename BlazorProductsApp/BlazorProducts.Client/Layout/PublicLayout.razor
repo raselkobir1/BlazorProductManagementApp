@@ -2,7 +2,6 @@
 
 @inherits LayoutComponentBase
 @inject NavigationManager Navigation
-@inject AuthService AuthService
 
 <div class="login-layout">
     <div class="content">
@@ -29,8 +28,4 @@
 </style>
 
 @code {
-    protected override void OnInitialized()
-    {
-        AuthService.Login();
-    }
 }

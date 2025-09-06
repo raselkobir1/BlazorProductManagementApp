@@ -18,6 +18,7 @@ builder.Services.AddScoped(sp => new HttpClient
     BaseAddress = new Uri("http://localhost:5071/api/")
 });
 builder.Services.AddScoped<IProductHttpRepository, ProductHttpRepository>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, TestAuthStateProvider>();

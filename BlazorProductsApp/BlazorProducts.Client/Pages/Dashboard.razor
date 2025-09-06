@@ -2,7 +2,6 @@
 
 @page "/dashboard"
 @inject NavigationManager Navigation
-@inject AuthService AuthService
 
 <h1>Dashboard</h1>
 <p>Welcome to your dashboard! Here's some static data:</p>
@@ -14,12 +13,5 @@
 
 
 @code {
-    protected override void OnInitialized()
-    {
-        // Check if user is logged in
-        if (!AuthService.IsLoggedIn)
-        {
-            Navigation.NavigateTo("/unauthorized");
-        }
-    }
+    
 }

@@ -1,5 +1,6 @@
 using BlazorProducts.Server.Context;
 using BlazorProducts.Server.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+  .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddCors(policy =>
 {
@@ -44,6 +48,7 @@ app.UseStaticFiles(new StaticFileOptions()
 app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,0 +1,72 @@
+﻿@using BlazorProducts.Client.Repository
+@using Entities.Dtos
+@layout Layout.PublicLayout
+
+@page "/registration"
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="card p-4 shadow" style="width: 400px;">
+        <h3 class="text-center">Register</h3>
+
+        @if (ShowRegistrationErrors)
+        {
+            <div class="alert alert-danger mt-1" role="alert">
+                @foreach (var error in Errors)
+                {
+                    <p>@error</p>
+                }
+            </div>
+        }
+
+        <EditForm Model="_userForRegistration" OnValidSubmit="Register">
+            <DataAnnotationsValidator />
+
+            <InputText class="form-control mt-3" id="Email" placeholder="Email"
+                       @bind-Value="_userForRegistration.Email" />
+            <ValidationMessage For="@(() => _userForRegistration.Email)" />
+
+            <InputText class="form-control mt-3" id="password" type="password" placeholder="Password"
+                       @bind-Value="_userForRegistration.Password" />
+            <ValidationMessage For="@(() => _userForRegistration.Password)" />
+
+            <InputText class="form-control mt-3" id="confirmPassword" type="password" placeholder="Confirm Password"
+                       @bind-Value="_userForRegistration.ConfirmPassword" />
+            <ValidationMessage For="@(() => _userForRegistration.ConfirmPassword)" />
+            <div class="row">
+                <button class="btn btn-success mt-3 justify-content-end" type="submit">Register</button>
+            </div>
+
+            <p class="mt-3 text-center">
+                Already have an account?
+                <NavLink href="/login">Login</NavLink>
+            </p>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private UserForRegistrationDto _userForRegistration = new UserForRegistrationDto();
+
+    [Inject] public IAuthenticationService AuthenticationService { get; set; }
+    [Inject] public NavigationManager NavigationManager { get; set; }
+
+    public bool ShowRegistrationErrors { get; set; }
+    public IEnumerable<string> Errors { get; set; }
+
+    public async Task Register()
+    {
+        ShowRegistrationErrors = false;
+
+        var result = await AuthenticationService.RegisterUser(_userForRegistration);
+
+        if (!result.IsSuccessfulRegistration)
+        {
+            Errors = result.Errors;
+            ShowRegistrationErrors = true;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    }
+}
