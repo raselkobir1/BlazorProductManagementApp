@@ -13,10 +13,11 @@ namespace BlazorProducts.Server.Context
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<Product> Products { get; set; }

@@ -49,10 +49,10 @@ namespace BlazorProducts.Client.Repository
             var result = JsonSerializer.Deserialize<AuthResponseDto>(authContent, _options);
 
             if (!authResult.IsSuccessStatusCode)
-                return result;
+                return result!;
 
-            await _localStorage.SetItemAsync("authToken", result.Token);
-            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(userForAuthentication.Email);
+            await _localStorage.SetItemAsync("authToken", result!.Token);
+            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.Token);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 
             return new AuthResponseDto { IsAuthSuccessful = true };
