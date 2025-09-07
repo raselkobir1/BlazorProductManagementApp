@@ -1,24 +1,59 @@
-﻿@using BlazorProducts.Client.Components
+﻿@using BlazorProducts.Client.AuthProviders
+@using BlazorProducts.Client.Components
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthStateProvider
+@* @attribute [Authorize] *@
+
 
 @inject NavigationManager Navigation
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <AuthLinks />
+    @if (isAuthenticated)
+    {
+        <div class="sidebar">
+            <NavMenu />
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        <main>
+            <div class="top-row px-4">
+                <AuthLinks />
+            </div>
+
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">Checking authentication...</p>
+            </div>
+        </div>
+    }
+
 </div>
 
 
 @code {
+    private bool isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+        }
+        else
+        {
+            isAuthenticated = true;
+        }
+    }
 }
