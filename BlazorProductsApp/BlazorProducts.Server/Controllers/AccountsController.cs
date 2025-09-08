@@ -52,7 +52,7 @@ namespace BlazorProducts.Server.Controllers
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
             user.RefreshToken = _tokenService.GenerateRefreshToken();
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             await _userManager.UpdateAsync(user);
 
             return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, RefreshToken = user.RefreshToken });

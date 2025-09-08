@@ -3,7 +3,7 @@ using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Components;
 namespace BlazorProducts.Client.Pages
 {
-    public partial class Products
+    public partial class Products: IDisposable
     {
         public List<Entities.Models.Product> ProductList { get; set; } = new List<Entities.Models.Product>();
         public MetaData MetaData { get; set; } = new MetaData();
@@ -11,6 +11,8 @@ namespace BlazorProducts.Client.Pages
 
         [Inject]
         public required IProductHttpRepository ProductRepo { get; set; }
+        [Inject]
+        public HttpInterceptorService Interceptor { get; set; }
         protected async override Task OnInitializedAsync()
         {
             await GetProducts();
@@ -31,7 +33,7 @@ namespace BlazorProducts.Client.Pages
         private async Task GetProducts()
         {
             //ProductList = await ProductRepo.GetProducts(); // without paging
-
+            Interceptor.RegisterEvent();
             var pagingResponse = await ProductRepo.GetProducts(_productParameters);
             ProductList = pagingResponse.Items;
             MetaData = pagingResponse.MetaData;
@@ -50,5 +52,7 @@ namespace BlazorProducts.Client.Pages
             _productParameters.PageNumber = 1;
             await GetProducts();
         }
+
+        public void Dispose() => Interceptor.DisposeEvent();
     }
 }
